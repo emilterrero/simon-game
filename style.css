@@ -1,0 +1,78 @@
+body, p, h1, h2, button {
+    margin: 0;
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.game-title {
+    color: lightblue;
+    font-family: 'Fredoka One', cursive;
+    font-size: 70px;
+}
+
+.start-btn {
+    background-color: lightblue;
+    color: white;
+    width: 120px;
+    height: 30px;
+    margin: 18px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+}
+
+
+.content-container {
+    background-color: white;
+    margin: 0 auto;
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-div {
+    background-color: white;
+    display: grid;
+    grid-template-areas: 
+    "a b"
+    "c d";
+    justify-content: center;
+}
+
+.game-btn {
+    margin: 5px;
+    width: 25vh;
+    height: 25vh;
+    border-radius: 15%;
+    border: none;
+}
+
+.btn-one {
+    background-color: #ff3300;
+}
+
+.btn-two {
+    background-color: #3333ff;
+}
+
+.btn-three {
+    background-color: #00cc00;
+}
+
+.btn-four {
+    background-color: yellow;
+}
+
+.scoreboard {
+    color: white;
+    background-color: lightblue;
+    height: 5vh;
+    width: 30vh;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
