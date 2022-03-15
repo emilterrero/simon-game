@@ -16,6 +16,13 @@ body, p, h1, h2, button {
 
 .start-btn {
     background-color: lightblue;
+}
+
+.reset-btn {
+}
+
+
+.index-btn {
     color: white;
     width: 120px;
     height: 30px;
