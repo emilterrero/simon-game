@@ -10,6 +10,10 @@ body, p, h1, h2, button {
     font-size: 70px;
 }
 
+.start-btn:hover {
+    background-color: #4fabc9;
+}
+
 .start-btn {
     background-color: lightblue;
     color: white;
@@ -42,12 +46,18 @@ body, p, h1, h2, button {
     justify-content: center;
 }
 
+.pattern.game-btn {
+    opacity: .2;
+}
+
 .game-btn {
     margin: 5px;
     width: 25vh;
     height: 25vh;
     border-radius: 15%;
-    border: none;
+    border: solid;
+    border-width: 5px;
+    border-color: white;
 }
 
 .btn-one {
