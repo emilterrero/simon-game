@@ -21,7 +21,7 @@ let startGame = () => {
         gameBtn.classList.remove('start-btn')
         gameBtn.classList.add('reset-btn')
         gamePattern.push(randomBtn)
-        gameBtn.innerText = "Reset Game"
+        gameBtn.innerText = "Reset"
         gameBtn.style.backgroundColor = "#ff6666"
 
         let patternLoop = async () => {
@@ -32,6 +32,7 @@ let startGame = () => {
                 gameBtns[gamePattern[i]].classList.remove('pattern') 
                 await patternEvent(500)
                 for (let i = 0; i < gameBtns.length; i++) {
+                    gameBtns[i].classList.add('active-btn')
                     let playerResponse = () => {
                         console.log(gameBtns[i])
                     }
@@ -42,7 +43,11 @@ let startGame = () => {
         patternLoop();
         console.log(gameBtns)
     } else {
-        gameBtn.innerText = "Start Game"
+        for (let i = 0; i < gameBtns.length; i++) {
+            gameBtns[i].classList.remove('active-btn')
+            gameBtns[i].classList.remove('pattern')
+        }
+        gameBtn.innerText = "Start"
         gameBtn.style.backgroundColor = 'lightblue'
         gamePattern = []
         playerPattern = []

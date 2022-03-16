@@ -24,8 +24,8 @@ body, p, h1, h2, button {
 
 .index-btn {
     color: white;
-    width: 120px;
-    height: 30px;
+    width: 15vw;
+    height: 5vh;
     margin: 18px;
     font-size: 15px;
     font-weight: bold;
@@ -58,13 +58,18 @@ body, p, h1, h2, button {
 }
 
 .game-btn {
-    margin: 5px;
-    width: 25vh;
-    height: 25vh;
+    margin: 1px;
+    width: 20vh;
+    height: 20vh;
     border-radius: 15%;
     border: solid;
     border-width: 5px;
     border-color: white;
+}
+
+.active-btn:hover {
+    opacity: .65;
+    border-color: grey;
 }
 
 .btn-one {
