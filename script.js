@@ -14,46 +14,54 @@ let patternEvent = (time) => {
     return new Promise((resolve) => setTimeout(resolve, time))
 }
 
-let startGame = () => {
-    if (gamePattern.length == 0) {
-        let randomBtn = Math.floor(Math.random() * 4)
-        let btn = document.querySelector(`[data-id*='${randomBtn}']`)
-        gameBtn.classList.remove('start-btn')
-        gameBtn.classList.add('reset-btn')
-        gamePattern.push(randomBtn)
-        gameBtn.innerText = "Reset"
-        gameBtn.style.backgroundColor = "#ff6666"
-
-        let patternLoop = async () => {
-            for (let i = 0; i < gamePattern.length; i++) {
-                await patternEvent(1000)
-                gameBtns[gamePattern[i]].classList.add('pattern') 
-                await patternEvent(1000)
-                gameBtns[gamePattern[i]].classList.remove('pattern') 
-                await patternEvent(500)
-                for (let i = 0; i < gameBtns.length; i++) {
-                    gameBtns[i].classList.add('active-btn')
-                    let playerResponse = () => {
-                        console.log(gameBtns[i])
-                    }
-                    gameBtns[i].addEventListener('click', playerResponse)
-                }
-            }
-        }
-        patternLoop();
-        console.log(gameBtns)
-    } else {
-        for (let i = 0; i < gameBtns.length; i++) {
-            gameBtns[i].classList.remove('active-btn')
-            gameBtns[i].classList.remove('pattern')
-        }
-        gameBtn.innerText = "Start"
-        gameBtn.style.backgroundColor = 'lightblue'
-        gamePattern = []
-        playerPattern = []
-        countIndex = 0
+let index = 0
+let matches = 0
+let checkMatches = (val) => {
+    if (val == gamePattern[index] && gamePattern.length > index) {
+        console.log("first match")
+        index++;
+        checkMatches(val)
+    } else if (gamePattern.length == index) {
+        console.log("checking done")
+        startGame()
     }
 }
 
+// startGame function needs work, should declare things before running conidtions or loops
+let startGame = () => {
+    let randomBtn = Math.floor(Math.random() * 4)
+    let btn = document.querySelector(`[data-id*='${randomBtn}']`)
+    gamePattern.push(randomBtn)
+    startBtn.style.display = "none"
+    resetBtn.style.display = "block"
+
+    let patternLoop = async () => {
+        for (let i = 0; i < gamePattern.length; i++) {
+            let currentBtn = gameBtns[gamePattern[i]]
+            await patternEvent(1000)
+            currentBtn.classList.add('pattern')
+            await patternEvent (1000)
+            currentBtn.classList.remove('pattern')
+            await patternEvent(500)
+        }
+
+        for (let i = 0; i < gameBtns.length; i++) {
+            gameBtns[i].classList.add('active-btn')
+            let playerResponse = () => {
+                console.log(gamePattern)
+                let playerClick = gameBtns[i].getAttribute('data-id')
+                playerPattern.push(playerClick)
+                console.log(playerClick)
+                checkMatches(playerClick)
+            }
+            gameBtns[i].addEventListener('click', playerResponse)
+        }
+    }
+    patternLoop()
+}
+let resetGame = () => {
+
+}
 startBtn.addEventListener('click', startGame)
+
 

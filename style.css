@@ -18,7 +18,21 @@ body, p, h1, h2, button {
     background-color: lightblue;
 }
 
+.reset-btn:hover {
+    background-color: #ff0000;
+}
+
 .reset-btn {
+    display: none;
+    color: white;
+    background-color: #ff6666; 
+    width: 15vw;
+    height: 5vh;
+    margin: 18px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+
 }
 
 
@@ -58,6 +72,7 @@ body, p, h1, h2, button {
 }
 
 .game-btn {
+    pointer: none;
     margin: 1px;
     width: 20vh;
     height: 20vh;
@@ -68,6 +83,7 @@ body, p, h1, h2, button {
 }
 
 .active-btn:hover {
+    pointer: auto;
     opacity: .65;
     border-color: grey;
 }
