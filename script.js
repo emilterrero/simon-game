@@ -4,6 +4,7 @@ let gameBtn = document.querySelector('.index-btn')
 let startBtn = document.querySelector('.start-btn')
 let resetBtn = document.querySelector('.reset-btn')
 let gameDiv = document.querySelector('.game-div')
+let gameOverDiv = document.querySelector('.game-over')
 let gameBtns = document.querySelectorAll('.game-btn')
 let scoreboard = document.querySelector('.scoreboard')
 let scoreCount = document.querySelector('.score-count')
@@ -18,21 +19,21 @@ let index = 0
 let matches = 0
 let checkMatches = () => {
     if (playerPattern[index] == gamePattern[index]) {
-        console.log("matched")
         matches++
         index++
         if (matches == gamePattern.length){
-            console.log("all matched!")
+            updateP.innerText = "Pattern matched!"
             playerScore++
-            scoreCount.innerText = playerScore
+            scoreCount.innerText = `Score: ${playerScore}`
             index = 0
             matches = 0
             playerPattern = []
-            startGame()
+            setTimeout(startGame, 3000)
         }
 
     } else if (playerPattern[index] !== gamePattern[index]) {
-        console.log("no Match")
+        gameOverDiv.style.display = "block"
+        updateP.innerText = "Wrong button, press Reset to start again"
     }
 }
 
@@ -44,15 +45,21 @@ let startGame = () => {
     startBtn.style.display = "none"
     resetBtn.style.display = "block"
     updateP.innerText = "Remember the pattern"
+    gameDiv.style.pointerEvents = 'none'
+    resetBtn.style.pointerEvents = 'none'
 
     let patternLoop = async () => {
         for (let i = 0; i < gamePattern.length; i++) {
             let currentBtn = gameBtns[gamePattern[i]]
-            await patternEvent(1000)
+            await patternEvent(600)
+            currentBtn.style.borderColor = "black"
             currentBtn.classList.add('pattern')
-            await patternEvent (1000)
+            await patternEvent (600)
+            currentBtn.style.borderColor = "white"
             currentBtn.classList.remove('pattern')
             await patternEvent(500)
+            gameDiv.style.pointerEvents = 'auto'
+            resetBtn.style.pointerEvents = 'auto'
         }
         updateP.innerText = "Repeat the pattern"
 
@@ -60,15 +67,32 @@ let startGame = () => {
     patternLoop()
 }
 let resetGame = () => {
-
+    gameOverDiv.style.display = "none";
+    playerScore = 0
+    scoreCount.innerText = "Score: 0"
+    index = 0
+    matches = 0
+    gamePattern = []
+    playerPattern = []
+    updateP.innerText = `Press 'Start' to begin`
+    startBtn.style.display = "block"
+    resetBtn.style.display = "none"
 }
+
 startBtn.addEventListener('click', startGame)
+resetBtn.addEventListener('click', resetGame)
 
 for (let i = 0; i < gameBtns.length; i++) {
     gameBtns[i].classList.add('active-btn')
     let playerResponse = () => {
         let playerClick = gameBtns[i].getAttribute('data-id')
         playerPattern.push(playerClick)
+        setTimeout(function() {
+            gameBtns[i].style.borderColor = "black"
+        }, 0)
+        setTimeout(function() {
+            gameBtns[i].style.borderColor = "white"
+        }, 100)
         checkMatches()
     }
     gameBtns[i].addEventListener('click', playerResponse)

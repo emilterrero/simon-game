@@ -64,15 +64,20 @@ body, p, h1, h2, button {
     grid-template-areas: 
     "a b"
     "c d";
-    justify-content: center;
+    align-items: center;
+}
+
+.game-over {
+    display: none;
+    color: red;
 }
 
 .pattern.game-btn {
-    opacity: .2;
+    opacity: .5;
+    background-color: black;
 }
 
 .game-btn {
-    pointer: none;
     margin: 1px;
     width: 20vh;
     height: 20vh;
@@ -82,11 +87,7 @@ body, p, h1, h2, button {
     border-color: white;
 }
 
-.active-btn:hover {
-    pointer: auto;
-    opacity: .65;
-    border-color: grey;
-}
+
 
 .btn-one {
     background-color: #ff3300;
