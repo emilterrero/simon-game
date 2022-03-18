@@ -7,23 +7,32 @@ let gameDiv = document.querySelector('.game-div')
 let gameBtns = document.querySelectorAll('.game-btn')
 let scoreboard = document.querySelector('.scoreboard')
 let scoreCount = document.querySelector('.score-count')
-let countIndex = 0
+let updateP = document.querySelector('.update')
 let gamePattern = []
 let playerPattern = []
 let patternEvent = (time) => {
     return new Promise((resolve) => setTimeout(resolve, time))
 }
-
+let playerScore = 0
 let index = 0
 let matches = 0
-let checkMatches = (val) => {
-    if (val == gamePattern[index] && gamePattern.length > index) {
-        console.log("first match")
-        index++;
-        checkMatches(val)
-    } else if (gamePattern.length == index) {
-        console.log("checking done")
-        startGame()
+let checkMatches = () => {
+    if (playerPattern[index] == gamePattern[index]) {
+        console.log("matched")
+        matches++
+        index++
+        if (matches == gamePattern.length){
+            console.log("all matched!")
+            playerScore++
+            scoreCount.innerText = playerScore
+            index = 0
+            matches = 0
+            playerPattern = []
+            startGame()
+        }
+
+    } else if (playerPattern[index] !== gamePattern[index]) {
+        console.log("no Match")
     }
 }
 
@@ -34,6 +43,7 @@ let startGame = () => {
     gamePattern.push(randomBtn)
     startBtn.style.display = "none"
     resetBtn.style.display = "block"
+    updateP.innerText = "Remember the pattern"
 
     let patternLoop = async () => {
         for (let i = 0; i < gamePattern.length; i++) {
@@ -44,18 +54,8 @@ let startGame = () => {
             currentBtn.classList.remove('pattern')
             await patternEvent(500)
         }
+        updateP.innerText = "Repeat the pattern"
 
-        for (let i = 0; i < gameBtns.length; i++) {
-            gameBtns[i].classList.add('active-btn')
-            let playerResponse = () => {
-                console.log(gamePattern)
-                let playerClick = gameBtns[i].getAttribute('data-id')
-                playerPattern.push(playerClick)
-                console.log(playerClick)
-                checkMatches(playerClick)
-            }
-            gameBtns[i].addEventListener('click', playerResponse)
-        }
     }
     patternLoop()
 }
@@ -64,4 +64,13 @@ let resetGame = () => {
 }
 startBtn.addEventListener('click', startGame)
 
+for (let i = 0; i < gameBtns.length; i++) {
+    gameBtns[i].classList.add('active-btn')
+    let playerResponse = () => {
+        let playerClick = gameBtns[i].getAttribute('data-id')
+        playerPattern.push(playerClick)
+        checkMatches()
+    }
+    gameBtns[i].addEventListener('click', playerResponse)
+}
 
