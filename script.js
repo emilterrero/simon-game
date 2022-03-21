@@ -17,6 +17,8 @@ let patternEvent = (time) => {
 let playerScore = 0
 let index = 0
 let matches = 0
+
+// Checsks to see the current card clicked by player matches game pattern
 let checkMatches = () => {
     if (playerPattern[index] == gamePattern[index]) {
         matches++
@@ -37,7 +39,7 @@ let checkMatches = () => {
     }
 }
 
-// startGame function needs work, should declare things before running conidtions or loops
+// StartGame function will create new randomBtn then push to gamePattern array
 let startGame = () => {
     let randomBtn = Math.floor(Math.random() * 4)
     let btn = document.querySelector(`[data-id*='${randomBtn}']`)
@@ -47,7 +49,8 @@ let startGame = () => {
     updateP.innerText = "Remember the pattern"
     gameDiv.style.pointerEvents = 'none'
     resetBtn.style.pointerEvents = 'none'
-
+    
+// ParentLoop will run through the gamePattern array to render the pattern on the gameBtns
     let patternLoop = async () => {
         for (let i = 0; i < gamePattern.length; i++) {
             let currentBtn = gameBtns[gamePattern[i]]
@@ -66,6 +69,8 @@ let startGame = () => {
     }
     patternLoop()
 }
+
+// Resets Games
 let resetGame = () => {
     gameOverDiv.style.display = "none";
     playerScore = 0
@@ -79,9 +84,7 @@ let resetGame = () => {
     resetBtn.style.display = "none"
 }
 
-startBtn.addEventListener('click', startGame)
-resetBtn.addEventListener('click', resetGame)
-
+// Loop created for gameBtns for player response
 for (let i = 0; i < gameBtns.length; i++) {
     gameBtns[i].classList.add('active-btn')
     let playerResponse = () => {
@@ -98,3 +101,5 @@ for (let i = 0; i < gameBtns.length; i++) {
     gameBtns[i].addEventListener('click', playerResponse)
 }
 
+startBtn.addEventListener('click', startGame)
+resetBtn.addEventListener('click', resetGame)
