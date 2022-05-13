@@ -14,12 +14,20 @@ body, p, h1, h2, button {
     background-color: #4fabc9;
 }
 
+.start-btn:active {
+    background-color: black;
+}
+
 .start-btn {
     background-color: lightblue;
 }
 
 .reset-btn:hover {
     background-color: #ff0000;
+}
+
+.reset-btn:active {
+    background-color: black;
 }
 
 .reset-btn {
@@ -87,7 +95,9 @@ body, p, h1, h2, button {
     border-color: white;
 }
 
-
+.game-btn:active {
+    border-color: black;
+}
 
 .btn-one {
     background-color: #ff3300;
