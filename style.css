@@ -97,6 +97,10 @@ body, p, h1, h2, button {
     border-color: white;
 }
 
+.game-btn:hover {
+    cursor: pointer;
+}
+
 .game-btn:active {
     border-color: black;
 }
